@@ -1,0 +1,30 @@
+* {
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  width: 400px;
+  min-height: 50px;
+}
+.urlLink {
+  display: block;
+  margin: 5px 0;
+}
+.error {
+  border: 2px solid #e08383;
+}
+.removeBtn {
+  margin-left: 10px;
+  border: 1px solid #e08383;
+  border-radius: 5px;
+  padding: 0 5px;
+  font-weight: 700;
+  color: #e08383;
+  cursor: pointer;
+}
+#userInputSection {
+  margin: 10px;
+  text-align: center;
+}
+#addUrlForm {
+  margin: 10px;
+}

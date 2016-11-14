@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "Miru",
+  "description": "A place to store media for later.",
+  "version": "1.0",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["popup.css"],
+      "js": ["third_party/jquery.min.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+   "activeTab",
+   "storage"
+  ]
+}
