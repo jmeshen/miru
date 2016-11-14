@@ -22,9 +22,8 @@
   cursor: pointer;
 }
 #userInputSection {
-  margin: 10px;
-  text-align: center;
+  margin: 10px 0;
 }
 #addUrlForm {
-  margin: 10px;
+  margin: 10px 0;
 }
