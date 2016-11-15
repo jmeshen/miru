@@ -1,6 +1,13 @@
 * {
   -webkit-font-smoothing: antialiased;
 }
+body {
+  margin: 0;
+  padding: 8px;
+}
+h1 {
+  margin-top: 0;
+}
 .container {
   width: 400px;
   min-height: 50px;

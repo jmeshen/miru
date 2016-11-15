@@ -20,42 +20,34 @@ function rerenderLinks(links) {
 
 function setLinks(links) {
   chrome.storage.sync.set({links: links}, function() {
-    console.log('Set links');
     rerenderLinks(links)
   });
 }
 
 function addLink(links, obj) {
-  if (obj.url.indexOf('http://') == -1) {
+  var re = new RegExp("^(http|https)://", "i");
+  if (!re.test(obj.url)) {
     obj.url = 'http://' + obj.url;
   }
   var key = obj.title ? obj.title : obj.url;
   links[key] = obj.url;
 
   chrome.storage.sync.set({links: links}, function() {
-    console.log('Added URL');
     rerenderLinks(links)
   });
 }
 
 function removeLink(links, title) {
-  console.log(title);
   delete links[title]
   setLinks(links);
 }
-// refactor to use $(document).ready if you're going to use jquery anyway
-document.addEventListener('DOMContentLoaded', function() {
-  var links = {
-    'google': 'https://google.com',
-    'facebook': 'https://facebook.com',
-    'giphy': 'https://giphy.com'
-  };
+
+$(document).ready(function() {
+  var links = {};
   chrome.storage.sync.get(function(storedLinks) {
-    console.info(storedLinks)
     if (storedLinks && storedLinks.links) {
       links = storedLinks.links;
     }
-    console.log('Links??', links)
     renderLinks(links);
   })
 
@@ -78,14 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 
   $('.container').on('click', '.removeBtn', function() {
-    console.log('clicking the x', $(this))
     var title = $(this).prev().text();
     removeLink(links, title);
   })
 
-  var saveCurrentPage = document.getElementById('saveCurrentPage');
-  saveCurrentPage.addEventListener('click', function() {
-
+  $('#saveCurrentPage').click(function() {
     chrome.tabs.getSelected(null, function(tab) {
       d = document;
       console.log(tab)
@@ -93,6 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         addLink(links, tab);
       }
     });
-  }, false);
-}, false);
+  })
+});
 
